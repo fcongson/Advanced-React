@@ -19,7 +19,7 @@ class DeleteItem extends Component {
     console.log(data, payload);
     // 2. filter the deleted item out of the page
     data.items = data.items.filter(
-      item => item.id !== payload.data.deleteItem.id
+      (item) => item.id !== payload.data.deleteItem.id
     );
     // 3. put the items back!
     cache.writeQuery({ query: ALL_ITEMS_QUERY, data });
@@ -35,7 +35,9 @@ class DeleteItem extends Component {
           <button
             onClick={() => {
               if (confirm("Are you sure you want to delete this item?")) {
-                deleteItem();
+                deleteItem().catch((err) => {
+                  alert(err.message);
+                });
               }
             }}
           >
