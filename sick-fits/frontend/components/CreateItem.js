@@ -31,15 +31,15 @@ class CreateItem extends Component {
     description: "",
     image: "",
     largeImage: "",
-    price: 0
+    price: 0,
   };
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, type, value } = e.target;
     const val = type === "number" ? parseFloat(value) : value;
     this.setState({ [name]: val });
   };
-  uploadFile = async e => {
-    console.log("uploading files...");
+  uploadFile = async (e) => {
+    // console.log("uploading files...");
     const files = e.target.files;
     const data = new FormData();
     data.append("file", files[0]);
@@ -50,10 +50,10 @@ class CreateItem extends Component {
       { method: "POST", body: data }
     );
     const file = await res.json();
-    console.log(file);
+    // console.log(file);
     this.setState({
       image: file.secure_url,
-      largeImage: file.eager[0].secure_url
+      largeImage: file.eager[0].secure_url,
     });
   };
   render() {
@@ -61,16 +61,17 @@ class CreateItem extends Component {
       <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
         {(createItem, { loading, error }) => (
           <Form
-            onSubmit={async e => {
+            data-test="form"
+            onSubmit={async (e) => {
               // Stop the form from submitting
               e.preventDefault();
               // call the mutation
               const res = await createItem(this.state);
               // change them to the single item page
-              console.log(res);
+              // console.log(res);
               Router.push({
                 pathname: "/item",
-                query: { id: res.data.createItem.id }
+                query: { id: res.data.createItem.id },
               });
             }}
           >
