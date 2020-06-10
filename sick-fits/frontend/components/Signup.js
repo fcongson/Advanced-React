@@ -41,7 +41,7 @@ class Signup extends Component {
             onSubmit={async (e) => {
               e.preventDefault();
               const res = await signup();
-              console.log(res);
+              // console.log(res);
               this.setState({ name: "", password: "", email: "" });
             }}
           >
@@ -88,3 +88,4 @@ class Signup extends Component {
 }
 
 export default Signup;
+export { SIGNUP_MUTATION };
