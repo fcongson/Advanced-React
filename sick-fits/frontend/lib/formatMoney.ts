@@ -1,4 +1,4 @@
-const formatMoney = (amount = 0) => {
+export const formatMoney = (amount = 0) => {
   const formatter = Intl.NumberFormat("en-NZ", {
     style: "currency",
     currency: "NZD",
@@ -7,5 +7,3 @@ const formatMoney = (amount = 0) => {
 
   return formatter.format(amount / 100);
 };
-
-export default formatMoney;

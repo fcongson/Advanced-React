@@ -1,5 +1,5 @@
 import Link from "next/link";
-import formatMoney from "../lib/formatMoney";
+import { formatMoney } from "../lib/formatMoney";
 import ItemStyles from "./styles/ItemStyles";
 import PriceTag from "./styles/PriceTag";
 import Title from "./styles/Title";

@@ -14,6 +14,9 @@ const Logo = styled.h1`
     text-decoration: none;
     text-transform: uppercase;
     padding: 0.5rem 1rem;
+    &:hover {
+      text-decoration: none;
+    }
   }
 `;
 
