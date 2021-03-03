@@ -1,3 +1,1 @@
-const IndexPage = () => <>Hello!</>;
-
-export default IndexPage;
+export { default } from "./products";

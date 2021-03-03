@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
-import Nav from "./Nav";
+import { Nav } from "./Nav";
 
 const Logo = styled.h1`
   font-size: 4rem;
@@ -33,7 +33,7 @@ const HeaderStyles = styled.header`
   }
 `;
 
-const Header = () => (
+export const Header = () => (
   <HeaderStyles>
     <div className="bar">
       <Logo>
@@ -46,5 +46,3 @@ const Header = () => (
     <Nav />
   </HeaderStyles>
 );
-
-export default Header;
