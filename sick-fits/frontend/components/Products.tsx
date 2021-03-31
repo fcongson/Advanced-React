@@ -1,10 +1,10 @@
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import styled from "styled-components";
-import { Product } from "./Product";
+import { ProductCard } from "./ProductCard";
 import { ALL_PRODUCTS } from "./types/ALL_PRODUCTS";
 
-const ALL_PRODUCTS_QUERY = gql`
+export const ALL_PRODUCTS_QUERY = gql`
   query ALL_PRODUCTS {
     allProducts {
       id
@@ -34,7 +34,7 @@ export const Products = () => {
   return (
     <ProductsListStyles>
       {data.allProducts.map((product) => (
-        <Product key={product.id} product={product} />
+        <ProductCard key={product.id} product={product} />
       ))}
     </ProductsListStyles>
   );

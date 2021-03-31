@@ -3,19 +3,24 @@ import { ChangeEvent, useState } from "react";
 export const useForm = <T extends object>(initial: T = {} as T) => {
   const [inputs, setInputs] = useState<T>(initial);
 
-  const getTypedValue = (e: ChangeEvent<HTMLInputElement>) => {
+  const getTypedValue = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
     const { type, value } = e.target;
     switch (type) {
       case "number":
         return parseInt(value);
       case "file":
-        return [e.target.files];
+        const files = (e as ChangeEvent<HTMLInputElement>).target.files;
+        return files[0];
       default:
         return value;
     }
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setInputs({
       ...inputs,
       [e.target.name]: getTypedValue(e),

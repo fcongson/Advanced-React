@@ -1,18 +1,65 @@
-import Link from "next/link";
-import { formatMoney } from "../lib/formatMoney";
-import ItemStyles from "./styles/ItemStyles";
-import PriceTag from "./styles/PriceTag";
-import Title from "./styles/Title";
-import { ALL_PRODUCTS_allProducts } from "./types/ALL_PRODUCTS";
+import { useQuery } from "@apollo/client";
+import gql from "graphql-tag";
+import Head from "next/head";
+import styled from "styled-components";
+import { ErrorMessage } from "./ErrorMessage";
+import { PRODUCT, PRODUCTVariables } from "./types/PRODUCT";
 
-export const Product = ({ product }: { product: ALL_PRODUCTS_allProducts }) => (
-  <ItemStyles>
-    <img src={product?.photo?.image?.publicUrlTransformed} alt={product.name} />
-    <Title>
-      <Link href={`product/${product.id}`}>{product.name}</Link>
-    </Title>
-    <PriceTag>{formatMoney(product.price)}</PriceTag>
-    <p>{product.description}</p>
-    {/* TODO Add buttons to edit and delete item */}
-  </ItemStyles>
-);
+const PRODUCT_QUERY = gql`
+  query PRODUCT($id: ID!) {
+    Product(where: { id: $id }) {
+      id
+      name
+      price
+      description
+      photo {
+        image {
+          publicUrlTransformed
+        }
+        altText
+      }
+    }
+  }
+`;
+
+const ProductStyles = styled.div`
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  max-width: var(--maxWidth);
+  align-items: top;
+  gap: 2rem;
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
+`;
+
+export const Product = ({ id }: { id: string }) => {
+  const { data, loading, error } = useQuery<PRODUCT, PRODUCTVariables>(
+    PRODUCT_QUERY,
+    {
+      variables: {
+        id,
+      },
+    }
+  );
+  if (loading) return <p>Loading...</p>;
+  if (error) return <ErrorMessage error={error} />;
+
+  const { Product } = data;
+  const { photo } = Product;
+
+  return (
+    <ProductStyles>
+      <Head>
+        <title>Sick Fits | {Product.name}</title>
+      </Head>
+      <img src={photo.image.publicUrlTransformed} alt={photo.altText} />
+      <div className="details">
+        <h2>{Product.name}</h2>
+        <p>{Product.description}</p>
+      </div>
+    </ProductStyles>
+  );
+};
