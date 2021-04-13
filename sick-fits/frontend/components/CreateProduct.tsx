@@ -1,36 +1,15 @@
 import { useMutation } from "@apollo/client";
-import gql from "graphql-tag";
+import Router from "next/router";
 import { useEffect, useState } from "react";
-import { useForm } from "../lib/useForm";
-import { ErrorMessage } from "./ErrorMessage";
-import { ALL_PRODUCTS_QUERY } from "./Products";
-import Form from "./styles/Form";
+import { CREATE_PRODUCT_MUTATION } from "../graphql/mutations/createProduct";
 import {
   CREATE_PRODUCT,
   CREATE_PRODUCTVariables,
-} from "./types/CREATE_PRODUCT";
-import Router from "next/router";
-
-const CREATE_PRODUCT_MUTATION = gql`
-  mutation CREATE_PRODUCT(
-    $name: String!
-    $description: String!
-    $price: Int!
-    $image: Upload
-  ) {
-    createProduct(
-      data: {
-        name: $name
-        description: $description
-        price: $price
-        status: "AVAILABLE"
-        photo: { create: { image: $image, altText: $name } }
-      }
-    ) {
-      id
-    }
-  }
-`;
+} from "../graphql/mutations/types/CREATE_PRODUCT";
+import { ALL_PRODUCTS_QUERY } from "../graphql/queries/allProducts";
+import { useForm } from "../lib/useForm";
+import { ErrorMessage } from "./ErrorMessage";
+import Form from "./styles/Form";
 
 export const CreateProduct = () => {
   const { inputs, handleChange, clearForm } = useForm<{

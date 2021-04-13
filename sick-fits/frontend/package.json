@@ -9,7 +9,7 @@
     "start": "next start -p 7777",
     "test": "NODE_ENV=test jest --watch",
     "download-schema": "npx apollo client:download-schema --endpoint=http://localhost:3000/api/graphql schemas/schema.json",
-    "codegen": "npx apollo client:codegen --localSchemaFile=schemas/schema.json --target=typescript --includes=\"{components,pages}/**/*.{ts,tsx,js,jsx,graphql}\" --addTypename --tagName=gql types"
+    "codegen": "npx apollo client:codegen --localSchemaFile=schemas/schema.json --target=typescript --includes=\"{components,pages,graphql}/**/*.{ts,tsx,js,jsx,graphql}\" --addTypename --tagName=gql types"
   },
   "author": "",
   "license": "ISC",
