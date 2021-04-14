@@ -1,7 +1,13 @@
 import { useQuery } from "@apollo/client";
 import styled from "styled-components";
+import { perPage } from "../config";
 import { ALL_PRODUCTS_QUERY } from "../graphql/queries/allProducts";
-import { ALL_PRODUCTS } from "../graphql/queries/types/ALL_PRODUCTS";
+import {
+  ALL_PRODUCTS,
+  ALL_PRODUCTSVariables,
+} from "../graphql/queries/types/ALL_PRODUCTS";
+import { ErrorMessage } from "./ErrorMessage";
+import { Loading } from "./Loading";
 import { ProductCard } from "./ProductCard";
 
 const ProductsListStyles = styled.div`
@@ -10,10 +16,20 @@ const ProductsListStyles = styled.div`
   grid-gap: 60px;
 `;
 
-export const Products = () => {
-  const { data, error, loading } = useQuery<ALL_PRODUCTS>(ALL_PRODUCTS_QUERY);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+export const Products = ({ page = 1 }: { page: number }) => {
+  const { data, error, loading } = useQuery<
+    ALL_PRODUCTS,
+    ALL_PRODUCTSVariables
+  >(ALL_PRODUCTS_QUERY, {
+    variables: {
+      skip: page * perPage - perPage,
+      first: perPage,
+    },
+  });
+
+  if (loading) return <Loading />;
+  if (error) return <ErrorMessage error={error} />;
+
   return (
     <ProductsListStyles>
       {data.allProducts.map((product) => (

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { PRODUCT_QUERY } from "../graphql/queries/product";
 import { PRODUCT, PRODUCTVariables } from "../graphql/queries/types/PRODUCT";
 import { ErrorMessage } from "./ErrorMessage";
+import { Loading } from "./Loading";
 
 const ProductStyles = styled.div`
   display: grid;
@@ -27,7 +28,7 @@ export const Product = ({ id }: { id: string }) => {
       },
     }
   );
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
   if (error) return <ErrorMessage error={error} />;
 
   const { Product } = data;

@@ -42,7 +42,7 @@ export const UpdateProduct = ({ id }) => {
     refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
   });
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <p>Loading...</p>;
 
   return (
     <Form

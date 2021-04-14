@@ -33,3 +33,8 @@ export interface ALL_PRODUCTS {
    */
   allProducts: (ALL_PRODUCTS_allProducts | null)[] | null;
 }
+
+export interface ALL_PRODUCTSVariables {
+  skip?: number | null;
+  first?: number | null;
+}
