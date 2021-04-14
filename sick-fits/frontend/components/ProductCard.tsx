@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ALL_PRODUCTS_allProducts } from "../graphql/queries/types/ALL_PRODUCTS";
 import { formatMoney } from "../lib/formatMoney";
+import { DeleteProduct } from "./DeleteProduct";
 import ItemStyles from "./styles/ItemStyles";
 import PriceTag from "./styles/PriceTag";
 import Title from "./styles/Title";
@@ -28,6 +29,7 @@ export const ProductCard = ({
       >
         Edit ✏️
       </Link>
+      <DeleteProduct id={product.id}>Delete</DeleteProduct>
     </div>
   </ItemStyles>
 );
