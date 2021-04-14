@@ -32,7 +32,7 @@ export const Products = ({ page = 1 }: { page: number }) => {
 
   return (
     <ProductsListStyles>
-      {data.allProducts.map((product) => (
+      {data?.allProducts.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </ProductsListStyles>

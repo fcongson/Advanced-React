@@ -1,25 +1,16 @@
-import {
-  ApolloCache,
-  FetchResult,
-  StoreObject,
-  useMutation,
-} from "@apollo/client";
+import { StoreObject, useMutation } from "@apollo/client";
 import { DELETE_PRODUCT_MUTATION } from "../graphql/mutations/deleteProduct";
 import {
   DELETE_PRODUCT,
   DELETE_PRODUCTVariables,
 } from "../graphql/mutations/types/DELETE_PRODUCT";
 
-const update = (
-  cache: ApolloCache<DELETE_PRODUCT>,
-  payload: FetchResult<DELETE_PRODUCT, Record<string, any>, Record<string, any>>
-) => {
-  cache.evict({
-    id: cache.identify({
-      __typename: payload.data.deleteProduct.__typename,
-      id: payload.data.deleteProduct.id,
-    } as StoreObject),
-  });
+const update = (cache: any, payload: any) => {
+  const id = cache.identify({
+    ...payload.data.deleteProduct,
+  } as StoreObject);
+  cache.evict(id);
+  cache.gc();
 };
 
 export const DeleteProduct = ({ id, children }) => {
@@ -27,9 +18,7 @@ export const DeleteProduct = ({ id, children }) => {
     DELETE_PRODUCT,
     DELETE_PRODUCTVariables
   >(DELETE_PRODUCT_MUTATION, {
-    variables: {
-      id,
-    },
+    variables: { id },
     update,
   });
   return (
