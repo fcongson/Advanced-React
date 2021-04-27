@@ -1,4 +1,5 @@
 import { StoreObject, useMutation } from "@apollo/client";
+import React from "react";
 import { DELETE_PRODUCT_MUTATION } from "../graphql/mutations/deleteProduct";
 import {
   DELETE_PRODUCT,
@@ -13,7 +14,10 @@ const update = (cache: any, payload: any) => {
   cache.gc();
 };
 
-export const DeleteProduct = ({ id, children }) => {
+export const DeleteProduct: React.FunctionComponent<{ id: string }> = ({
+  id,
+  children,
+}) => {
   const [deleteProduct, { loading }] = useMutation<
     DELETE_PRODUCT,
     DELETE_PRODUCTVariables
