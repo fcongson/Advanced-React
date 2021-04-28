@@ -14,7 +14,7 @@ export const RequestResetPassword = () => {
   }>({
     email: "",
   });
-  const [requestResetPassword, { data, error }] = useMutation<
+  const [requestResetPassword, { data, loading, error }] = useMutation<
     REQUEST_RESET_PASSWORD,
     REQUEST_RESET_PASSWORDVariables
   >(REQUEST_RESET_PASSWORD_MUTATION, {
@@ -31,7 +31,7 @@ export const RequestResetPassword = () => {
     <Form method="POST" onSubmit={handleSubmit}>
       <h2>Request To Reset Your Password</h2>
       <ErrorMessage error={error} />
-      <fieldset>
+      <fieldset disabled={loading} aria-busy={loading}>
         {data?.sendUserPasswordResetLink === null && (
           <p>Success! Checkyour email for a link!</p>
         )}

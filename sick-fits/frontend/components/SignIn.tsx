@@ -14,7 +14,7 @@ export const SignIn = () => {
     email: "",
     password: "",
   });
-  const [signIn, { data, error: signInError }] = useMutation<
+  const [signIn, { data, loading, error: signInError }] = useMutation<
     SIGN_IN,
     SIGN_INVariables
   >(SIGN_IN_MUTATION, {
@@ -37,7 +37,7 @@ export const SignIn = () => {
     <Form method="POST" onSubmit={handleSubmit}>
       <h2>Sign Into Your Account</h2>
       <ErrorMessage error={signInError || error} />
-      <fieldset>
+      <fieldset disabled={loading} aria-busy={loading}>
         <label htmlFor="email">
           Email
           <input

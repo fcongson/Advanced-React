@@ -15,12 +15,12 @@ export const SignUp = () => {
     email: "",
     password: "",
   });
-  const [signUp, { data, error }] = useMutation<SIGN_UP, SIGN_UPVariables>(
-    SIGN_UP_MUTATION,
-    {
-      variables: inputs,
-    }
-  );
+  const [signUp, { data, loading, error }] = useMutation<
+    SIGN_UP,
+    SIGN_UPVariables
+  >(SIGN_UP_MUTATION, {
+    variables: inputs,
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ export const SignUp = () => {
     <Form method="POST" onSubmit={handleSubmit}>
       <h2>Sign Up For An Account</h2>
       <ErrorMessage error={error} />
-      <fieldset>
+      <fieldset disabled={loading} aria-busy={loading}>
         {data?.createUser && (
           <p>Signed up with {data.createUser.email} - Please Sign In</p>
         )}

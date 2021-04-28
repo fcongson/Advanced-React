@@ -16,7 +16,7 @@ export const ResetPassword = ({ token }: { token: string }) => {
     email: "",
     password: "",
   });
-  const [resetPassword, { data, error: resetError }] = useMutation<
+  const [resetPassword, { data, loading, error: resetError }] = useMutation<
     RESET_PASSWORD,
     RESET_PASSWORDVariables
   >(RESET_PASSWORD_MUTATION, {
@@ -28,7 +28,7 @@ export const ResetPassword = ({ token }: { token: string }) => {
     await resetPassword().catch(console.error);
     resetForm();
   };
-  const error = data?.redeemUserPasswordResetToken.code
+  const error = data?.redeemUserPasswordResetToken?.code
     ? data.redeemUserPasswordResetToken
     : undefined;
 
@@ -36,7 +36,7 @@ export const ResetPassword = ({ token }: { token: string }) => {
     <Form method="POST" onSubmit={handleSubmit}>
       <h2>Reset Your Password</h2>
       <ErrorMessage error={resetError || error} />
-      <fieldset>
+      <fieldset disabled={loading} aria-busy={loading}>
         {data?.redeemUserPasswordResetToken === null && (
           <p>Success! You can now sign in</p>
         )}
