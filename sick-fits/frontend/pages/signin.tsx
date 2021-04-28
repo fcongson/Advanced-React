@@ -3,18 +3,18 @@ import { RequestResetPassword } from "../components/RequestResetPassword";
 import { SignIn } from "../components/SignIn";
 import { SignUp } from "../components/SignUp";
 
-const GridStyles = styled.div`
+const SignInPageStyles = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 4rem;
 `;
 
 const SignInPage = () => (
-  <GridStyles>
+  <SignInPageStyles>
     <SignIn />
     <SignUp />
     <RequestResetPassword />
-  </GridStyles>
+  </SignInPageStyles>
 );
 
 export default SignInPage;

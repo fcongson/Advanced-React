@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const ItemStyles = styled.div`
-  background: white;
-  border: 1px solid var(--offWhite);
+  border-radius: 2rem;
+  background: var(--white);
   box-shadow: var(--bs);
   position: relative;
   display: flex;
@@ -26,11 +26,20 @@ const ItemStyles = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     grid-gap: 1px;
     background: var(--lightGray);
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    text-align: center;
     & > * {
-      background: white;
+      background: var(--white);
       border: 0;
       font-size: 1rem;
       padding: 1rem;
+      &:first-child {
+        border-bottom-left-radius: 2rem;
+      }
+      &:last-child {
+        border-bottom-right-radius: 2rem;
+      }
     }
   }
 `;

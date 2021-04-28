@@ -27,7 +27,7 @@ export const ProductCard = ({
           },
         }}
       >
-        Edit ✏️
+        Edit
       </Link>
       <DeleteProduct id={product.id}>Delete</DeleteProduct>
     </div>
