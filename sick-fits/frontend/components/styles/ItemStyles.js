@@ -11,6 +11,8 @@ const ItemStyles = styled.div`
     width: 100%;
     height: 400px;
     object-fit: cover;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
   }
   p {
     line-height: 2;
@@ -26,8 +28,8 @@ const ItemStyles = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     grid-gap: 1px;
     background: var(--lightGray);
-    border-bottom-left-radius: 2rem;
-    border-bottom-right-radius: 2rem;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
     text-align: center;
     & > * {
       background: var(--white);
@@ -35,10 +37,10 @@ const ItemStyles = styled.div`
       font-size: 1rem;
       padding: 1rem;
       &:first-child {
-        border-bottom-left-radius: 2rem;
+        border-bottom-left-radius: inherit;
       }
       &:last-child {
-        border-bottom-right-radius: 2rem;
+        border-bottom-right-radius: inherit;
       }
     }
   }
