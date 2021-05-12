@@ -21,7 +21,8 @@ export const Nav = () => {
             My Cart{" "}
             <CartCount
               count={user.cart.reduceRight(
-                (tally, cartItem) => tally + cartItem.quantity,
+                (tally, cartItem) =>
+                  tally + (cartItem.product ? cartItem.quantity : 0),
                 0
               )}
             />
