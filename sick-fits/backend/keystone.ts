@@ -6,6 +6,8 @@ import {
 } from "@keystone-next/keystone/session";
 import "dotenv/config";
 import { sendPasswordResetEmail } from "./lib/mail";
+import { extendGraphqlSchema } from "./mutations";
+import { CartItem } from "./schemas/CartItem";
 import { Product } from "./schemas/Product";
 import { ProductImage } from "./schemas/ProductImage";
 import { User } from "./schemas/User";
@@ -56,7 +58,9 @@ export default withAuth(
       User,
       Product,
       ProductImage,
+      CartItem,
     }),
+    extendGraphqlSchema,
     ui: {
       // Show the UI only for peoples who pass this test
       isAccessAllowed: ({ session }) => {
