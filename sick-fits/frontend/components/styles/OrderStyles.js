@@ -3,10 +3,11 @@ import styled from 'styled-components';
 const OrderStyles = styled.div`
   max-width: 1000px;
   margin: 0 auto;
-  border: 1px solid var(--offWhite);
+  /* border: 1px solid var(--offWhite); */
+  border-radius: 2rem;
   box-shadow: var(--bs);
   padding: 2rem;
-  border-top: 10px solid var(--red);
+  /* border-top: 10px solid var(--red); */
   & > p {
     display: grid;
     grid-template-columns: 1fr 5fr;

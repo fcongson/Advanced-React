@@ -27,6 +27,7 @@ const Form = styled.form`
   input,
   textarea,
   select {
+    font-family: var(--fontFamily);
     width: 100%;
     padding: 0.5rem;
     font-size: 1rem;

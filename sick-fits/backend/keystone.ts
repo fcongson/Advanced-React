@@ -8,10 +8,12 @@ import "dotenv/config";
 import { sendPasswordResetEmail } from "./lib/mail";
 import { extendGraphqlSchema } from "./mutations";
 import { CartItem } from "./schemas/CartItem";
+import { permissionsList } from "./schemas/fields";
 import { Order } from "./schemas/Order";
 import { OrderItem } from "./schemas/OrderItem";
 import { Product } from "./schemas/Product";
 import { ProductImage } from "./schemas/ProductImage";
+import { Role } from "./schemas/Role";
 import { User } from "./schemas/User";
 import { insertSeedData } from "./seed-data";
 
@@ -63,6 +65,7 @@ export default withAuth(
       CartItem,
       OrderItem,
       Order,
+      Role,
     }),
     extendGraphqlSchema,
     ui: {
@@ -72,7 +75,7 @@ export default withAuth(
       },
     },
     session: withItemData(statelessSessions(sessionConfig), {
-      User: `id`,
+      User: `id name email role { ${permissionsList.join(" ")} }`,
     }),
   })
 );

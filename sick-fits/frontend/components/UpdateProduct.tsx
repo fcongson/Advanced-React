@@ -1,12 +1,12 @@
 import { useMutation, useQuery } from "@apollo/client";
 import React from "react";
-import { useEffect } from "react";
 import { UPDATE_PRODUCT_MUTATION } from "../graphql/mutations/updateProduct";
 import { ALL_PRODUCTS_QUERY } from "../graphql/queries/allProducts";
 import { PRODUCT_QUERY } from "../graphql/queries/product";
 import { PRODUCT, PRODUCTVariables } from "../graphql/queries/types/PRODUCT";
 import { useForm } from "../lib/useForm";
 import { ErrorMessage } from "./ErrorMessage";
+import { Loading } from "./Loading";
 import Form from "./styles/Form";
 
 export const UpdateProduct = ({ id }) => {
@@ -42,7 +42,7 @@ export const UpdateProduct = ({ id }) => {
     refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
   });
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
 
   return (
     <Form
